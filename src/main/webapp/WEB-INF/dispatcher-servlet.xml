@@ -11,6 +11,7 @@
                 http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <!-- Enables the Spring MVC @Controller programming model -->
+    <!--Our application will contain Annotations in some classes. So take them into account.-->
     <mvc:annotation-driven/>
     <mvc:resources mapping="/resources/**" location="/resources/"/>
 
