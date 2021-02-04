@@ -6,19 +6,53 @@
 package emergon.entity;
 
 import java.io.Serializable;
-
+import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author alkinoos
  */
-
+@Entity
+@Table(name = "product")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p")
+    , @NamedQuery(name = "Product.findByPcode", query = "SELECT p FROM Product p WHERE p.pcode = :pcode")
+    , @NamedQuery(name = "Product.findByPdescr", query = "SELECT p FROM Product p WHERE p.pdescr = :pdescr")
+    , @NamedQuery(name = "Product.findByPprice", query = "SELECT p FROM Product p WHERE p.pprice = :pprice")})
 public class Product implements Serializable {
 
-    
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "pcode")
     private Integer pcode;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "pdescr")
     private String pdescr;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "pprice")
     private double pprice;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pcode")
+    private List<Sales> salesList;
 
     public Product() {
     }
@@ -31,12 +65,14 @@ public class Product implements Serializable {
         this.pcode = pcode;
         this.pdescr = pdescr;
     }
-    
-    public Product(Integer pcode, String pdescr, double pprice){
+
+    public Product(Integer pcode, String pdescr, double pprice) {
         this.pcode = pcode;
         this.pdescr = pdescr;
         this.pprice = pprice;
     }
+    
+    
 
     public Integer getPcode() {
         return pcode;
@@ -60,6 +96,15 @@ public class Product implements Serializable {
 
     public void setPprice(double pprice) {
         this.pprice = pprice;
+    }
+
+    @XmlTransient
+    public List<Sales> getSalesList() {
+        return salesList;
+    }
+
+    public void setSalesList(List<Sales> salesList) {
+        this.salesList = salesList;
     }
 
     @Override
