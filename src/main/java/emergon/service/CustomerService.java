@@ -33,4 +33,28 @@ public class CustomerService {
         customers.add(customer);
     }
 
+    public void deleteCustomer(int id) {
+        for(Customer c : customers){
+            if(c.getCcode().equals(id)){
+                customers.remove(c);
+                break;
+            }
+        }
+    }
+
+    public Customer getCustomerById(int ccode) {
+        for(Customer c  : customers){
+            if(c.getCcode() == ccode){
+                return c;
+            }
+        }
+        return null;
+    }
+
+    public Customer updateCustomer(Customer customer) {//customer contains the new data from the form
+        Customer customerToUpdate = getCustomerById(customer.getCcode());
+        customerToUpdate.setCname(customer.getCname());
+        return customerToUpdate;
+    }
+
 }
