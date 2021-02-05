@@ -32,7 +32,7 @@ public class DatabaseConfig {
         datasource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         datasource.setUrl("jdbc:mysql://localhost:3306/sales?serverTimeZone=UTC");
         datasource.setUsername("root");
-        datasource.setPassword("8VB9VNCMGNX6K");
+        datasource.setPassword("");
         return datasource;
     }
     
@@ -60,7 +60,7 @@ public class DatabaseConfig {
         sessionFactory.setPackagesToScan("emergon.entity");
         return sessionFactory;
     }
-    //method to take care of transactions
+    //method to take care of transactions INSERT & UPDATE & DELETE
     @Bean //Make HibernateTransactionManager a bean in order to go into a Spring Container gia auto pou epistrefei i methodos
     @Autowired //Inject SessionFactory into that method gia auto pou mpeni san parametro stin methodo epidi to exoume epano os @Bean
     public HibernateTransactionManager transactionManager(SessionFactory sf){

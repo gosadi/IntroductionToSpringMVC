@@ -6,55 +6,48 @@
 package emergon.service;
 
 import emergon.entity.Customer;
-import java.util.ArrayList;
+import emergon.repository.CustomerRepo;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author alkinoos
  */
+@Transactional
 @Service
 public class CustomerService {
 
+    @Autowired
+    CustomerRepo customerRepo;
+    
     private List<Customer> customers;
 
     public List<Customer> getCustomers() {
-        if (customers == null) {
-            customers = new ArrayList();
-            customers.add(new Customer(1, "Jack"));
-            customers.add(new Customer(2, "Jonathan"));
-            customers.add(new Customer(3, "Jenny"));
-        }
+       List<Customer> customers = customerRepo.findAll();
         return customers;
     }
 
     public void addCustomer(Customer customer) {
-        customers.add(customer);
+        customerRepo.save(customer);
     }
 
     public void deleteCustomer(int id) {
-        for(Customer c : customers){
-            if(c.getCcode().equals(id)){
-                customers.remove(c);
-                break;
-            }
-        }
+        customerRepo.delete(Customer.class, id);
     }
 
     public Customer getCustomerById(int ccode) {
-        for(Customer c  : customers){
-            if(c.getCcode() == ccode){
-                return c;
-            }
-        }
-        return null;
+        return customerRepo.find(ccode);
     }
 
     public Customer updateCustomer(Customer customer) {//customer contains the new data from the form
-        Customer customerToUpdate = getCustomerById(customer.getCcode());
-        customerToUpdate.setCname(customer.getCname());
-        return customerToUpdate;
+       return customerRepo.save(customer);
     }
+    
+    
+    
+    
 
 }

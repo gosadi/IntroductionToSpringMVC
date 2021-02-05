@@ -23,7 +23,7 @@
         </c:if>
         <form action="${link}" method="POST">
             <label for="ccode">Code:</label>
-            <input id="ccode" type="number" name="ccode" value="${customerToEdit.ccode}"/>
+            <input id="ccode" type="number" name="ccode" value="${customerToEdit.ccode}" readonly/>
 
             <br>
             <label for="cname">Name:</label>

@@ -8,6 +8,9 @@ package emergon.controller;
 import emergon.entity.Customer;
 import emergon.service.CustomerService;
 import java.util.List;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +33,7 @@ public class CustomerController {
 
     @Autowired
     private CustomerService service;
+   
     
     @RequestMapping
     public ModelAndView showCustomers(ModelAndView modelAndView){
@@ -52,7 +56,7 @@ public class CustomerController {
     }
     
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String create(Customer customer, RedirectAttributes attributes){
+    public String create(Customer customer, RedirectAttributes attributes){//object gia to redirect pou kaname gia na valoume attributes sto request
         service.addCustomer(customer);
         String minima = "Customer " + customer.getCname()+ " successfully created!!";
         attributes.addFlashAttribute("message",minima);
@@ -64,8 +68,7 @@ public class CustomerController {
         service.deleteCustomer(id);
         String minima = "Customer  successfully deleted!!";
         attributes.addFlashAttribute("message", minima);
-        return "redirect:/customer"; 
-        
+        return "redirect:/customer";
     }
     
 //    edo exoume tsimpisi to path variable  apo to update sti lista

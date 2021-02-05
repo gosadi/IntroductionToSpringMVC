@@ -16,13 +16,18 @@
         <h1>This is my list with products</h1>
         <div>
             <h3>Products</h3>
+            <p>
+                ${message}
+            </p>
             <a href="${pageContext.request.contextPath}/product/create">Add product</a>
-            <table>
+            <table border="1">
                 <thead>
                     <tr>
                         <th>Code</th>
                         <th>Description</th>
                         <th>Price</th>
+                        <th>Update</th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
                 <c:forEach items="${listOfProducts}" var="product">
@@ -30,6 +35,12 @@
                         <td>${product.pcode}</td>
                         <td>${product.pdescr}</td>
                         <td>${product.pprice}</td>
+                        <td>
+                            <a href="${pageContext.request.contextPath}/product/update/${product.pcode}">Update</a>
+                        </td>
+                        <td>
+                            <a href="${pageContext.request.contextPath}/product/delete?id=${product.pcode}">Delete</a>
+                        </td>
                     </c:forEach>
                 </tr>
             </table>

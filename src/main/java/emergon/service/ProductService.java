@@ -6,31 +6,43 @@
 package emergon.service;
 
 import emergon.entity.Product;
+import emergon.repository.ProductRepo;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author alkinoos
  */
+@Transactional
 @Service
 public class ProductService {
-
+    
+    @Autowired
+    private ProductRepo productRepo;
     private List<Product> products;
 
     public List<Product> getProducts() {
-        if (products == null) {
-            products = new ArrayList();
-            products.add(new Product(1, "GPU", 499.99));
-            products.add(new Product(2, "CPU", 399.99));
-            products.add(new Product(3, "MONITOR", 599.99));
-        }
-        return products;
+       List<Product> products =productRepo.findAll();
+       return products;
     }
 
     public void addProduct(Product product) {
-        products.add(product);
+        productRepo.save(product);
     }
 
+    public void deleteProduct(int id) {
+        productRepo.delete(Product.class, id);
+    }
+
+    public Product getProductById(int pcode) {
+        return productRepo.find(pcode);
+    }
+
+    public Product updateProduct(Product product) {//product contains the new data from the form
+       return productRepo.save(product);
+    }
 }
