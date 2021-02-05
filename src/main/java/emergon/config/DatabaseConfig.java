@@ -40,7 +40,7 @@ public class DatabaseConfig {
     private Properties getHibernateProperties(){
         //Properties object is something like a HashMap and its from JAVA
         Properties properties = new Properties();
-        properties.put("hibernate.dialect", "org.hibernate.dialect.MYSQL8Dialect"); 
+        properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect"); 
         properties.put("hibernate.show_sql", "true");
         properties.put("hibernate.format_sql", "true");
         return properties;

@@ -6,7 +6,6 @@
 package emergon.entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -54,7 +53,7 @@ public class Salesman implements Serializable {
     private String scity;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "scomm")
-    private BigDecimal scomm;
+    private double scomm;
     @OneToMany(mappedBy = "salesman")
     private List<Family> familyList;
     @OneToMany(mappedBy = "smcode")
@@ -96,11 +95,11 @@ public class Salesman implements Serializable {
         this.scity = scity;
     }
 
-    public BigDecimal getScomm() {
+    public double getScomm() {
         return scomm;
     }
 
-    public void setScomm(BigDecimal scomm) {
+    public void setScomm(double scomm) {
         this.scomm = scomm;
     }
 

@@ -6,7 +6,8 @@
 package emergon.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -54,8 +55,8 @@ public class Family implements Serializable {
     @Column(name = "frelationship")
     private String frelationship;
     @Column(name = "dob")
-    @Temporal(TemporalType.DATE)
-    private Date dob;
+    
+    private LocalDate dob;
     @JoinColumn(name = "salesman", referencedColumnName = "scode")
     @ManyToOne
     private Salesman salesman;
@@ -96,11 +97,11 @@ public class Family implements Serializable {
         this.frelationship = frelationship;
     }
 
-    public Date getDob() {
+    public LocalDate getDob() {
         return dob;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(LocalDate dob) {
         this.dob = dob;
     }
 
