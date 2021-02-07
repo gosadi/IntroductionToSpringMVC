@@ -7,10 +7,12 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
-
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
     <head>
+        <spring:url value="/resources/css/style.css" var="styleCSS" />
+        <link href="${styleCSS}" rel="stylesheet" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Customer</title>
     </head>
@@ -18,9 +20,7 @@
         <h1>This is my list with customers</h1>
         <div>
             <h3>Customers</h3>
-            <p>
-                ${message}
-            </p>
+            <p>${message}</p>
             <a href="${pageContext.request.contextPath}/customer/create">Add customer</a>
             <table border="1">
                 <thead>
