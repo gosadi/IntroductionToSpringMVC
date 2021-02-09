@@ -13,24 +13,24 @@
         <title>create Page</title>
     </head>
     <body>
-        <h1>Create your customer</h1>
-        
         <c:if test="${customerToEdit==null}">
             <c:url value="/customer/create" var="link"/>
+            <c:set value="Create your customer" var="UpdateOrCreate"></c:set>   
         </c:if>
         <c:if test="${customerToEdit!=null}">
             <c:url value="/customer/update" var="link"/>
+            <c:set value="Update your customer" var="UpdateOrCreate"></c:set>
         </c:if>
+        <h1>${UpdateOrCreate}</h1>
         <form action="${link}" method="POST">
             <label for="ccode">Code:</label>
-            <input id="ccode" type="number" name="ccode" value="${customerToEdit.ccode}" readonly/>
-
+                <input id="ccode" type="number" name="ccode" value="${customerToEdit.ccode}" readonly/>
             <br>
             <label for="cname">Name:</label>
-            <input  id="cname" type="text" name="cname" value="${customerToEdit.cname}"/>
+                <input  id="cname" type="text" name="cname" value="${customerToEdit.cname}"/>
             <br>
-
             <input type="submit" value="Submit"/>
         </form>
+            
     </body>
 </html>

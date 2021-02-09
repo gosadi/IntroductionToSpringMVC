@@ -9,5 +9,6 @@
         <h1>${myMessage}</h1>
         <a href="${pageContext.request.contextPath}/customer">Customers</a>
         <a href="${pageContext.request.contextPath}/product">Products</a>
+        <a href="${pageContext.request.contextPath}/salesman">Salesmen</a>
     </body>
 </html>

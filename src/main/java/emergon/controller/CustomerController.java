@@ -69,7 +69,7 @@ public class CustomerController {
     }
     
 //    edo exoume tsimpisi to path variable  apo to update sti lista
-    @GetMapping("/update/{ccode}")
+    @GetMapping("/update/{ccode}")//edo exoume enan placeholder
     public String showFormUpdate(@PathVariable(name = "ccode") int ccode, Model model){
         Customer customer = service.getCustomerById(ccode);
         model.addAttribute("customerToEdit", customer);
