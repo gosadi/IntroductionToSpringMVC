@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib uri ="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,34 +14,35 @@
         <title>create Page</title>
     </head>
     <body>
-        <c:if test="${salesmanToEdit==null}">
+        <c:if test="${poliths==null}">
             <c:url value="/salesman/create" var="link"/>
             <c:set value="Create your salesman" var="UpdateOrCreate"></c:set>   
         </c:if>
-        <c:if test="${salesmanToEdit!=null}">
+        <c:if test="${poliths!=null}">
             <c:url value="/salesman/update" var="link"/>
             <c:set value="Update your salesman" var="UpdateOrCreate"></c:set>
         </c:if>
         <h1>${UpdateOrCreate}</h1>
-        <form action="${link}" method="POST">
-            <label for="scode">Code:</label>
-            <input id="scode" type="number" name="scode" value="${salesmanToEdit.scode}" readonly/>
+        <form:form action="${link}" method="POST" modelAttribute="poliths">
+            <form:hidden path="scode" />
             <br>
             <label for="sname">Name:</label>
-            <input  id="sname" type="text" name="sname" value="${salesmanToEdit.sname}"/>
+            <form:input  id="sname" path="sname" />
+            <form:errors path="sname"></form:errors>
             <br>
             <label for="scity">City:</label>
-            <select id="scity" name="scity" value="${salesmanToEdit.scity}">
+            <form:select id="scity" path="scity">
                 <c:forEach items="${listOfCities}" var="city">
-                    <option value="${city}">${city}</option>
+                    <form:option value="${city}">${city}</form:option>
                 </c:forEach>
-            </select>
+            </form:select>
             <br>
             <label for="scomm">Commission:</label>
-            <input  id="scomm" type="number" step= "0.01" name="scomm" value="${salesmanToEdit.scomm}"/>
+            <form:input  id="scomm" type="number" step= "0.01" path="scomm" />
+            <form:errors path="scomm"></form:errors>
             <br>
             <input type="submit" value="Submit"/>
-        </form>
+        </form:form>
 
     </body>
 </html>

@@ -17,6 +17,9 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -44,14 +47,15 @@ public class Salesman implements Serializable {
     @Column(name = "scode")
     private Integer scode;
     @Basic(optional = false)
+    @NotEmpty
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 10)
     @Column(name = "sname")
     private String sname;
     @Size(max = 15)
     @Column(name = "scity")
     private String scity;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Max(value=5)  @Min(value=0)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "scomm")
     private double scomm;
     @OneToMany(mappedBy = "salesman")

@@ -8,10 +8,12 @@ package emergon.controller;
 import emergon.entity.Salesman;
 import emergon.service.SalesmanService;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -48,12 +50,15 @@ public class SalesmanController {
      *
      */
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public String showForm() {
-        return "salesman/salesmanForm";
+    public String showForm(@ModelAttribute("poliths") Salesman salesman) {//fiaxnoume ena antikeimeno salesman/
+        return "salesman/salesmanForm";                                                               //topothetite mesa sto ModelAttribute kai to perni i jsp
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String create(Salesman salesman, RedirectAttributes attributes) {//object gia to redirect pou kaname gia na valoume attributes sto request
+    public String create(@Valid @ModelAttribute("poliths") Salesman salesman, BindingResult result ,RedirectAttributes attributes) {//object gia to redirect pou kaname gia na valoume attributes sto request
+        if(result.hasErrors()){
+            return "salesman/salesmanForm"; //ean ipaxoun sfalmata tote epestrepse stin idia forma
+        }
         service.saveSalesman(salesman);
         String minima = "Salesman " + salesman.getSname() + " successfully created!!";
         attributes.addFlashAttribute("message", minima);
@@ -73,12 +78,15 @@ public class SalesmanController {
     @GetMapping("/update/{scode}")
     public String showFormUpdate(@PathVariable(name = "scode") int scode, Model model) {
         Salesman salesman = service.getSalesmanById(scode);
-        model.addAttribute("salesmanToEdit", salesman);
+        model.addAttribute("poliths", salesman);
         return "salesman/salesmanForm";
     }
 
     @PostMapping("/update")
-    public String update(Salesman salesman, RedirectAttributes attributes) {
+    public String update(@Valid @ModelAttribute("poliths")Salesman salesman,BindingResult result, RedirectAttributes attributes) {
+        if(result.hasErrors()){
+            return "salesman/salesmanForm";
+        }
         service.saveSalesman(salesman);
         String minima = "Salesman  updated successfully!!";
         attributes.addFlashAttribute("message", minima);
