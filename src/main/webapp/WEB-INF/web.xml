@@ -18,7 +18,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/</url-pattern> <!-- pou akouei to dispatcher servlet, dld akouei se ola ta request -->
     </servlet-mapping>
     
     <session-config>
