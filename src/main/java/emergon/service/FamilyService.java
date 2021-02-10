@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class FamilyService {
 
     @Autowired
-    FamilyRepo familyRepo;
+    private FamilyRepo familyRepo;
 
     public List<Family> getFamilies() {
         List<Family> families = familyRepo.findAll();
@@ -41,9 +41,15 @@ public class FamilyService {
         return familyRepo.findById(id);
     }
 
-    public List<Family> getFamiliesBySalesman(int id){
-        List<Family> families =   familyRepo.findByFk(id);
-        return families;
+//    public List<Family> getFamiliesBySalesman(int id){
+//        List<Family> families =   familyRepo.findByFk(id);
+//        return families;
+//    }
+    
+    
+    public List<Family> getFamilyBySalesman(int scode){
+        List<Family> family = familyRepo.findBySalesmanId(scode);
+        return family;
     }
     
 }

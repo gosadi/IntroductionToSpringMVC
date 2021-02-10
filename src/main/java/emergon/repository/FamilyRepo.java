@@ -6,6 +6,8 @@
 package emergon.repository;
 import emergon.entity.Family;
 import java.util.List;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 /**
  *
@@ -33,13 +35,16 @@ public class FamilyRepo extends HibernateUtil<Family> implements CrudRepo<Family
     public List<Family> findAll() {
         return super.findAll("Family.findAll");
     }
-
-//    @Override
-    public List<Family> findByFk(int id) {
-        return super.findByFk("Family.findBySalesman",id);
+    
+    
+    
+    public List<Family> findBySalesmanId(int scode){
+        Session session = getSession();
+        Query<Family> query = session.createNamedQuery("Family.findBySalesman", Family.class);
+        query.setParameter("scode",scode);
+        List<Family> family = query.getResultList();
+        return family;
     }
-    
-    
-    
+   
     
 }

@@ -39,7 +39,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Family.findByFname", query = "SELECT f FROM Family f WHERE f.fname = :fname")
     , @NamedQuery(name = "Family.findByFrelationship", query = "SELECT f FROM Family f WHERE f.frelationship = :frelationship")
     , @NamedQuery(name = "Family.findByDob", query = "SELECT f FROM Family f WHERE f.dob = :dob")
-    , @NamedQuery(name = "Family.findBySalesman", query = "SELECT f FROM Family f JOIN FETCH f.salesman s WHERE s.scode = :scode")})
+    , @NamedQuery(name = "Family.findBySalesman", query = "SELECT f FROM Family f WHERE f.salesman.scode = :scode")})
 public class Family implements Serializable {
 
     private static final long serialVersionUID = 1L;

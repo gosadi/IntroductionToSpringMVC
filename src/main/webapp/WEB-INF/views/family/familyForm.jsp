@@ -1,5 +1,5 @@
 <%-- 
-    Document   : salesmanForm
+    Document   : familyForm
     Created on : Feb 3, 2021, 8:42:14 PM
     Author     : alkinoos
 --%>
@@ -14,23 +14,23 @@
         <title>create Page</title>
     </head>
     <body>
-        <c:if test="${poliths==null}">
-            <c:url value="/salesman/create" var="link"/>
-            <c:set value="Create your salesman" var="UpdateOrCreate"></c:set>   
+        <c:if test="${family==null}">
+            <c:url value="/family/create" var="link"/>
+            <c:set value="Create your family" var="UpdateOrCreate"></c:set>   
         </c:if>
-        <c:if test="${poliths!=null}">
-            <c:url value="/salesman/update" var="link"/>
-            <c:set value="Update your salesman" var="UpdateOrCreate"></c:set>
+        <c:if test="${family!=null}">
+            <c:url value="/family/update" var="link"/>
+            <c:set value="Update your family" var="UpdateOrCreate"></c:set>
         </c:if>
         <h1>${UpdateOrCreate}</h1>
-        <form:form action="${link}" method="POST" modelAttribute="poliths">
-            <form:hidden path="scode" />
+        <form:form action="${link}" method="POST" modelAttribute="family">
+            <form:hidden path="fid" />
             <br>
-            <label for="sname">Name:</label>
-            <form:input  id="sname" path="sname" />
-            <form:errors path="sname"></form:errors>
+            <label for="fname">Name:</label>
+            <form:input  id="fname" path="fname" />
+            <form:errors path="fname"></form:errors>
             <br>
-            <label for="scity">City:</label>
+            <label for="frelationship">Relationship:</label>
             <form:select id="scity" path="scity">
                 <c:forEach items="${listOfCities}" var="city">
                     <form:option value="${city}">${city}</form:option>

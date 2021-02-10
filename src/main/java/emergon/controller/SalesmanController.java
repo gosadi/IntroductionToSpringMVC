@@ -5,7 +5,9 @@
  */
 package emergon.controller;
 
+import emergon.entity.Family;
 import emergon.entity.Salesman;
+import emergon.service.FamilyService;
 import emergon.service.SalesmanService;
 import java.util.List;
 import javax.validation.Valid;
@@ -35,6 +37,9 @@ public class SalesmanController {
 
     @Autowired
     private SalesmanService service;
+    
+    @Autowired
+    private FamilyService familyService;
 
     @RequestMapping
     public ModelAndView showSalesmen(ModelAndView modelAndView) {
@@ -104,4 +109,20 @@ public class SalesmanController {
         attributes.addFlashAttribute("message", minima);
         return "redirect:/salesman";
     }
+    
+    
+    @GetMapping("/{scode}/family")
+    public String showFamily(@PathVariable(name="scode") int scode, Model model){
+        List<Family> family = familyService.getFamilyBySalesman(scode);
+        String message = "";
+            if(family.isEmpty()){
+                message = scode + "does not have any registered family members";
+            }else{
+                message = "Salesman family members are:";
+            }
+            model.addAttribute("family",family);
+            model.addAttribute("message",message);
+            return "salesman/familyList";
+        }
+    
 }

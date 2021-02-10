@@ -1,8 +1,4 @@
-<%-- 
-    Document   : salesmanList
-    Created on : Feb 3, 2021, 8:04:36 PM
-    Author     : alkinoos
---%>
+
 
 
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>

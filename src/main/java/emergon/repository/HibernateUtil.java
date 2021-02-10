@@ -53,11 +53,12 @@ public class HibernateUtil<E> {
         session.remove(e);
     }
     
-    protected List<E> findByFk(String query,int id){
-        session = getSession();
-        Query myquery = session.createNamedQuery(query);
-        myquery.setParameter("scode", id);
-        List<E> list = myquery.getResultList();
-        return list;
-    }
+//    TODO generic findByFk
+//    protected List<E> findByFk(String query,int id){
+//        session = getSession();
+//        Query myquery = session.createNamedQuery(query);
+//        myquery.setParameter("scode", id);
+//        List<E> list = myquery.getResultList();
+//        return list;
+//    }
 }

@@ -93,12 +93,12 @@ public class FamilyController {
         return "redirect:/family";
     }
     
-    @GetMapping("/{scode}")
-    public String showFamily(@PathVariable(name = "scode") int scode, Model model){
-       List<Family> families  = service.getFamiliesBySalesman(scode);
-       model.addAttribute("listOfFamilies", families);
-       return "family/salesmanFamilyList";
-    }
+//    @GetMapping("/{scode}")
+//    public String showFamily(@PathVariable(name = "scode") int scode, Model model){
+//       List<Family> families  = service.getFamiliesBySalesman(scode);
+//       model.addAttribute("listOfFamilies", families);
+//       return "family/salesmanFamilyList";
+//    }
 
 //    @ExceptionHandler(DataIntegrityViolationException.class)//anti na kano trycatch kalo ton exception handler
 //    public String handleDataIntegrityViolationException(RedirectAttributes attributes) {
