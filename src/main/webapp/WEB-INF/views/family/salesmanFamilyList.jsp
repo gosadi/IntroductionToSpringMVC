@@ -1,6 +1,6 @@
 <%-- 
     Document   : salesmanList
-    Created on : Feb 3, 2021, 8:04:36 PM
+    Created on : Feb 10, 2021
     Author     : alkinoos
 --%>
 
@@ -27,27 +27,23 @@
                     <tr>
                         <th>Code</th>
                         <th>Name</th>
-                        <th>City</th>
-                        <th>Commission</th>
+                        <th>Relationship</th>
+                        <th>Date Of Birth</th>
                         <th>Update</th>
                         <th>Delete</th>
-                        <th>View Family</th>
                     </tr>
                 </thead>
-                <c:forEach items="${listOfSalesmen}" var = "salesman"><!-- edo tsimpame ton salesman apo tin lista -->
+                <c:forEach items="${listOfFamilies}" var = "families"><!-- edo tsimpame ton salesman apo tin lista -->
                     <tr>
-                        <td>${salesman.scode}</td>
-                        <td>${salesman.sname}</td>
-                        <td>${salesman.scity}</td>
-                        <td>${salesman.scomm}</td>
+                        <td>${families.fid}</td>
+                        <td>${families.fname}</td>
+                        <td>${families.frelationship}</td>
+                        <td>${families.dob}</td>
                         <td>
-                            <a href="${pageContext.request.contextPath}/salesman/update/${salesman.scode}">Update</a>
+                            <a href="${pageContext.request.contextPath}/salesman/update/${families.fid}">Update</a>
                         </td>
                         <td>
-                            <a href="${pageContext.request.contextPath}/salesman/delete?id=${salesman.scode}">Delete</a>
-                        </td>
-                        <td>
-                            <a href="${pageContext.request.contextPath}/family/${salesman.scode}">View Family</a>
+                            <a href="${pageContext.request.contextPath}/salesman/delete?id=${families.fid}">Delete</a>
                         </td>
                     </tr>
                 </c:forEach>

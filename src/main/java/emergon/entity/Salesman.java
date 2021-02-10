@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -58,7 +59,7 @@ public class Salesman implements Serializable {
     @Max(value=5)  @Min(value=0)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "scomm")
     private double scomm;
-    @OneToMany(mappedBy = "salesman")
+    @OneToMany(mappedBy = "salesman",fetch = FetchType.LAZY)
     private List<Family> familyList;
     @OneToMany(mappedBy = "smcode")
     private List<Sales> salesList;

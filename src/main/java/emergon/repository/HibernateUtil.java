@@ -29,7 +29,7 @@ public class HibernateUtil<E> {
 
     //Methods for CRUD operations
     protected List<E> findAll(String query) {
-        getSession();
+        session = getSession();
         Query myQuery = session.createNamedQuery(query);  //NAMED QUERY APO TO ENTITY edo mesa
         List<E> list = myQuery.getResultList();
         return list;
@@ -51,5 +51,13 @@ public class HibernateUtil<E> {
         session = getSession();
         E e = session.find(type, id);
         session.remove(e);
+    }
+    
+    protected List<E> findByFk(String query,int id){
+        session = getSession();
+        Query myquery = session.createNamedQuery(query);
+        myquery.setParameter("scode", id);
+        List<E> list = myquery.getResultList();
+        return list;
     }
 }

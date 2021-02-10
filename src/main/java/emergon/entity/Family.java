@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,7 +38,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Family.findByFid", query = "SELECT f FROM Family f WHERE f.fid = :fid")
     , @NamedQuery(name = "Family.findByFname", query = "SELECT f FROM Family f WHERE f.fname = :fname")
     , @NamedQuery(name = "Family.findByFrelationship", query = "SELECT f FROM Family f WHERE f.frelationship = :frelationship")
-    , @NamedQuery(name = "Family.findByDob", query = "SELECT f FROM Family f WHERE f.dob = :dob")})
+    , @NamedQuery(name = "Family.findByDob", query = "SELECT f FROM Family f WHERE f.dob = :dob")
+    , @NamedQuery(name = "Family.findBySalesman", query = "SELECT f FROM Family f JOIN FETCH f.salesman s WHERE s.scode = :scode")})
 public class Family implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,10 +57,9 @@ public class Family implements Serializable {
     @Column(name = "frelationship")
     private String frelationship;
     @Column(name = "dob")
-    
     private LocalDate dob;
     @JoinColumn(name = "salesman", referencedColumnName = "scode")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Salesman salesman;
 
     public Family() {
@@ -122,7 +123,6 @@ public class Family implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Family)) {
             return false;
         }
